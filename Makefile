@@ -6,3 +6,9 @@ run:
 build:
 	cargo build
 
+fix:
+	cargo fix
+
+fmt:
+	cargo fmt
+
