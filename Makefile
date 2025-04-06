@@ -1,7 +1,7 @@
 .PHONY: run build
 
 run:
-	cargo run
+	cargo watch -x run
 
 build:
 	cargo build
