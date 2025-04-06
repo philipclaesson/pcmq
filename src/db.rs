@@ -9,7 +9,8 @@ pub fn init_db() -> Result<Pool<SqliteConnectionManager>> {
     let conn = pool.get().expect("Failed to get connection from pool");
     conn.execute_batch(
         "
-        CREATE TABLE IF NOT EXISTS messages (
+        DROP TABLE IF EXISTS messages;
+        CREATE TABLE messages (
             id TEXT PRIMARY KEY,
             body TEXT NOT NULL,
             topic TEXT NOT NULL,

@@ -45,5 +45,14 @@ impl MessageQueue {
         
         Ok(message)
     }
-}
 
+    pub fn acknowledge(&self, id: String) -> Result<()> {
+        println!("Acknowledging message with id {}", id);
+        self.pool.get().expect("failed to get connection from pool").execute(
+            "UPDATE messages SET acknowledged = 1 WHERE id = ?1",
+            [&id],
+        )?;
+        println!("Acknowledged message with id {}", id);
+        Ok(())
+    }
+}

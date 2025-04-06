@@ -14,6 +14,7 @@ pub fn create_router(queue: MessageQueue) -> Router {
     // .route("/hello", get(hello))
     .route("/enqueue", post(enqueue))
     .route("/dequeue", post(dequeue))
+    .route("/acknowledge", post(acknowledge))
     .with_state(queue)
 }
 
@@ -57,4 +58,18 @@ async fn dequeue(
 ) -> Json<DequeueResponse> {
     let msg = queue.dequeue(payload.topic).unwrap();
     Json(DequeueResponse { id: msg.id, body: msg.body })
+}
+
+#[derive(Deserialize)]
+struct AcknowledgeRequest {
+    id: String,
+}
+
+
+async fn acknowledge(
+    State(queue): State<Arc<MessageQueue>>,
+    Json(payload): Json<AcknowledgeRequest>,
+) -> Json<&'static str> {
+    queue.acknowledge(payload.id).unwrap();
+    Json("ok")
 }
