@@ -12,3 +12,5 @@ fix:
 fmt:
 	cargo fmt
 
+test:
+	cargo test

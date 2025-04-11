@@ -3,7 +3,11 @@ use rusqlite::{Connection, Result};
 use r2d2::Pool;
 
 pub fn init_db() -> Result<Pool<SqliteConnectionManager>> {
-    let manager = SqliteConnectionManager::file("queue.db");
+    init_db_with_path("queue.db")
+}
+
+pub fn init_db_with_path(db_path: &str) -> Result<Pool<SqliteConnectionManager>> {
+    let manager = SqliteConnectionManager::file(db_path);
     let pool = Pool::new(manager).expect("Failed to create pool");
 
     let conn = pool.get().expect("Failed to get connection from pool");

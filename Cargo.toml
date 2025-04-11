@@ -3,6 +3,10 @@ name = "pcmq"
 version = "0.1.0"
 edition = "2024"
 
+[lib]
+name = "pcmq"
+path = "src/lib.rs"
+
 [dependencies]
 axum = "0.8.3"
 r2d2 = "0.8.10"
