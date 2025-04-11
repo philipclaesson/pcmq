@@ -1,9 +1,9 @@
 use std::sync::Arc;
 use serde::{Deserialize, Serialize};
-use crate::queue::{Message, MessageQueue};
+use crate::queue::MessageQueue;
 use axum::{
     extract::State,
-    routing::{get, post},
+    routing::post,
     Json, Router,
 };
 
@@ -16,10 +16,6 @@ pub fn create_router(queue: MessageQueue) -> Router {
     .route("/dequeue", post(dequeue))
     .route("/acknowledge", post(acknowledge))
     .with_state(queue)
-}
-
-async fn hello() -> Json<&'static str> {
-    Json("hello")
 }
 
 #[derive(Deserialize)]

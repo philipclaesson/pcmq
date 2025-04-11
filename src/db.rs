@@ -1,5 +1,5 @@
 use r2d2_sqlite::SqliteConnectionManager;
-use rusqlite::{Connection, Result};
+use rusqlite::Result;
 use r2d2::Pool;
 
 pub fn init_db() -> Result<Pool<SqliteConnectionManager>> {
